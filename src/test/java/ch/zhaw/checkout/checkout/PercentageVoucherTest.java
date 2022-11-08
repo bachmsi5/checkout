@@ -25,11 +25,20 @@ public class PercentageVoucherTest {
         ArrayList<Product> products = new ArrayList<>();
         Product prod1 = new Product("1", "Tennis Ball", "Sports", 10.0);
         products.add(prod1);
-        PercentageVoucher voucher = new PercentageVoucher(percentage);
-        double disc = voucher.getDiscount(products);
-        assertEquals(
-                (prod1.getPrice() / 100) * percentage,
-                disc);
+        if (percentage == 0) {
+            Exception exception = assertThrows(RuntimeException.class, () -> {
+                new PercentageVoucher(percentage);
+            });
+            String expectedMessageLtZero = "Discount value must be greater than zero.";
+            String actualMessage = exception.getMessage();
+            assertTrue(actualMessage.contains(expectedMessageLtZero));
+        } else {
+            PercentageVoucher voucher = new PercentageVoucher(percentage);
+            double disc = voucher.getDiscount(products);
+            assertEquals(
+                    (prod1.getPrice() / 100) * percentage,
+                    disc);
+        }
     }
 
     @Test
