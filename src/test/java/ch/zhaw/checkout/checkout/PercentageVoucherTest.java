@@ -18,6 +18,7 @@ import ch.zhaw.checkout.checkout.model.Product;
 
 public class PercentageVoucherTest {
 
+    // Just a comment to push to git, to check the app rebuild
     @ParameterizedTest
     @ValueSource(ints = { 0, 1, 2, 5, 20, 49, 50 })
     public void testVoucherSingleProduct(int percentage) {
